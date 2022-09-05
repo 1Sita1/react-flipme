@@ -1,6 +1,6 @@
 {
-    "name": "react-flip",
-    "version": "1.0.0",
+    "name": "react-flipme",
+    "version": "0.0.0",
     "description": "React UI library for flipping cards",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
@@ -18,6 +18,14 @@
         "card",
         "react"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/1Sita1/react-flip.git"
+    },
+    "bugs": {
+        "url": "https://github.com/1Sita1/react-flip/issues"
+    },
+    "homepage": "https://github.com/1Sita1/react-flip/blob/main/README.md",
     "author": "Arsenii Alkhimenko",
     "license": "MIT",
     "devDependencies": {
