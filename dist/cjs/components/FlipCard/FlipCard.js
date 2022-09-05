@@ -8,48 +8,38 @@ const react_1 = __importDefault(require("react"));
 const Front_1 = __importDefault(require("./sides/Front"));
 const Back_1 = __importDefault(require("./sides/Back"));
 const react_jss_1 = require("react-jss");
+const jss_plugin_isolate_1 = __importDefault(require("jss-plugin-isolate"));
+react_jss_1.jss.use((0, jss_plugin_isolate_1.default)({
+    isolate: true
+}));
 const useStyles = (0, react_jss_1.createUseStyles)({
     flipCard: {
         backgroundColor: "transparent",
         width: "300px",
-        height: "200px",
-        border: "1px solid #f1f1f1",
-        perspective: "1000px"
+        height: "300px",
+        perspective: "1000px",
+        "&:hover > div": {
+            transform: "rotateY(180deg)"
+        }
     },
     flipCardInner: {
         position: "relative",
         width: "100%",
         height: "100%",
-        textAlign: "center",
-        transition: "transform 0.8",
+        transition: "transform 0.8s",
         transformStyle: "preserve-3d",
+        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
         "&:hover": {
             transform: "rotateY(180deg)"
         }
-    },
-    myButton: {
-        color: "green",
-        margin: {
-            // jss-expand gives more readable syntax
-            top: 5,
-            right: 0,
-            bottom: 0,
-            left: "1rem"
-        },
-        "& span": {
-            // jss-nested applies this to a child span
-            fontWeight: "bold" // jss-camel-case turns this into 'font-weight'
-        }
-    },
-    myLabel: {
-        fontStyle: "italic"
     }
 });
-console.log(useStyles);
-const FlipCard = ({ children }) => {
-    const classes = useStyles();
-    return (react_1.default.createElement("div", { className: classes.flipCard },
-        react_1.default.createElement("div", { className: classes.flipCardInner }, ...children)));
+const FlipCard = (props) => {
+    const classes = useStyles(props);
+    return (react_1.default.createElement("div", { className: classes.flipCard, style: props.style },
+        react_1.default.createElement("div", { className: classes.flipCardInner },
+            props.children[0],
+            props.children[1])));
 };
 exports.FlipCard = FlipCard;
 FlipCard.Front = Front_1.default;

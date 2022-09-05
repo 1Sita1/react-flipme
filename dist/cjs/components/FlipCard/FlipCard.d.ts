@@ -1,10 +1,20 @@
 import React from "react";
+import { FrontProps } from "./sides/Front";
+import { BackProps } from "./sides/Back";
+declare type ChildrenType = [React.ReactElement<FrontProps>, React.ReactElement<BackProps>] | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>];
 declare type FlipCardProps = {
-    children: React.ReactElement[];
+    children: ChildrenType;
+    style?: React.CSSProperties;
+    variant?: "light" | "dark";
+    width?: String;
+    height?: String;
+    theme: {
+        width: String;
+    };
 };
 declare const FlipCard: {
-    ({ children }: FlipCardProps): JSX.Element;
-    Front: React.FC<{}>;
-    Back: React.FC<{}>;
+    (props: FlipCardProps): JSX.Element;
+    Front: React.FC<FrontProps>;
+    Back: React.FC<BackProps>;
 };
 export { FlipCard };

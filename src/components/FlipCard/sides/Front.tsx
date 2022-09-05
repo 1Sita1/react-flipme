@@ -10,16 +10,27 @@ const useStyles = createUseStyles({
         webkitBackfaceVisibility: "hidden",
         backfaceVisibility: "hidden",
         backgroundColor: "#bbb",
-        color: "black"
+        color: "black",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     }
 })
 
-type FrontProps = {}
+export type FrontProps = {
+    children?: any
+    style?: React.CSSProperties
+    variant?: "light" | "dark"
+}
 
-const Front: React.FC<FrontProps> = (props: FrontProps) => {
+const Front: React.FC<FrontProps> = ({ children, style }: FrontProps) => {
     const classes = useStyles()
 
-    return <div className={classes.flipCardFront}>Front</div>
+    return (
+        <div className={classes.flipCardFront} style={style}>
+            {children}
+        </div>
+    )
 }
 
 export default Front

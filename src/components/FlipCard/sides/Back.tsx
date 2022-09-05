@@ -11,15 +11,27 @@ const useStyles = createUseStyles({
         backfaceVisibility: "hidden",
         backgroundColor: "dodgerblue",
         color: "white",
-        transform: "rotateY(180deg)"
+        transform: "rotateY(180deg)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     }
 })
 
-type BackProps = {}
+export type BackProps = {
+    children?: any
+    style?: React.CSSProperties
+    variant?: "light" | "dark"
+}
 
-const Back: React.FC<BackProps> = () => {
+const Back: React.FC<BackProps> = ({ children, style }: BackProps) => {
     const classes = useStyles()
-    return <div className={classes.flipCardBack}>Back</div>
+
+    return (
+        <div className={classes.flipCardBack} style={style}>
+            {children}
+        </div>
+    )
 }
 
 export default Back

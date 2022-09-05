@@ -1,4 +1,8 @@
 import React from "react";
-declare type FrontProps = {};
+export declare type FrontProps = {
+    children?: any;
+    style?: React.CSSProperties;
+    variant?: "light" | "dark";
+};
 declare const Front: React.FC<FrontProps>;
 export default Front;

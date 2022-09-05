@@ -1,6 +1,6 @@
 {
     "name": "react-flipme",
-    "version": "0.1.0",
+    "version": "0.1.9",
     "description": "React UI library for flipping cards",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
@@ -40,6 +40,7 @@
     },
     "dependencies": {
         "prettier": "^2.7.1",
-        "react-jss": "^10.9.2"
+        "react-jss": "^10.9.2",
+        "jss-plugin-isolate": "^10.9.2"
     }
 }

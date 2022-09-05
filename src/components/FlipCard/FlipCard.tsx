@@ -1,40 +1,61 @@
 import React from "react"
-import Front from "./sides/Front"
-import Back from "./sides/Back"
+import Front, { FrontProps } from "./sides/Front"
+import Back, { BackProps } from "./sides/Back"
+import { jss, createUseStyles } from "react-jss"
+import isolate from "jss-plugin-isolate"
 
-import { createUseStyles } from "react-jss"
+jss.use(
+    isolate({
+        isolate: true
+    })
+)
 
 const useStyles = createUseStyles({
     flipCard: {
         backgroundColor: "transparent",
         width: "300px",
-        height: "200px",
-        border: "1px solid #f1f1f1",
-        perspective: "1000px"
+        height: "300px",
+        perspective: "1000px",
+        "&:hover > div": {
+            transform: "rotateY(180deg)"
+        }
     },
     flipCardInner: {
         position: "relative",
         width: "100%",
         height: "100%",
-        textAlign: "center",
-        transition: "transform 0.8",
+        transition: "transform 0.8s",
         transformStyle: "preserve-3d",
+        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
         "&:hover": {
             transform: "rotateY(180deg)"
         }
     }
 })
 
+type ChildrenType =
+    | [React.ReactElement<FrontProps>, React.ReactElement<BackProps>]
+    | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>]
 type FlipCardProps = {
-    children: React.ReactElement[]
+    children: ChildrenType
+    style?: React.CSSProperties
+    variant?: "light" | "dark"
+    width?: String
+    height?: String
+    theme: {
+        width: String
+    }
 }
 
-const FlipCard = ({ children }: FlipCardProps) => {
-    const classes = useStyles()
+const FlipCard = (props: FlipCardProps) => {
+    const classes = useStyles(props)
 
     return (
-        <div className={classes.flipCard}>
-            <div className={classes.flipCardInner}>{...children}</div>
+        <div className={classes.flipCard} style={props.style}>
+            <div className={classes.flipCardInner}>
+                {props.children[0]}
+                {props.children[1]}
+            </div>
         </div>
     )
 }
