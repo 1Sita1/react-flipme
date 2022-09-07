@@ -1,2 +1,2 @@
-export declare const test = 320341;
 export * from "./components";
+export declare const test3 = 3;

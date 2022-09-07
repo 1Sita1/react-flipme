@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.test1 = exports.FlipCard = void 0;
 const react_1 = __importDefault(require("react"));
 const Front_1 = __importDefault(require("./sides/Front"));
 const Back_1 = __importDefault(require("./sides/Back"));
@@ -40,7 +41,9 @@ const FlipCard = (props) => {
             props.children[0],
             props.children[1])));
 };
+exports.FlipCard = FlipCard;
 FlipCard.Front = Front_1.default;
 FlipCard.Back = Back_1.default;
-exports.default = FlipCard;
+const test1 = 1;
+exports.test1 = test1;
 //# sourceMappingURL=FlipCard.js.map

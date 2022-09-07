@@ -37,5 +37,6 @@ const FlipCard = (props) => {
 };
 FlipCard.Front = Front;
 FlipCard.Back = Back;
-export default FlipCard;
+const test1 = 1;
+export { FlipCard, test1 };
 //# sourceMappingURL=FlipCard.js.map

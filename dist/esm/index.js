@@ -1,3 +1,3 @@
-export const test = 320341;
 export * from "./components";
+export const test3 = 3;
 //# sourceMappingURL=index.js.map
