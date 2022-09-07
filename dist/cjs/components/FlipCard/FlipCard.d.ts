@@ -14,4 +14,4 @@ declare const FlipCard: {
     Front: React.FC<FrontProps>;
     Back: React.FC<BackProps>;
 };
-export { FlipCard };
+export default FlipCard;
