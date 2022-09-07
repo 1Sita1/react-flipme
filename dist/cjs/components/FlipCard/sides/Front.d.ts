@@ -1,4 +1,5 @@
 import React from "react";
+declare const CardFront: import("styled-components").StyledComponent<"div", any, {}, never>;
 export declare type FrontProps = {
     children?: any;
     style?: React.CSSProperties;
@@ -6,3 +7,4 @@ export declare type FrontProps = {
 };
 declare const Front: React.FC<FrontProps>;
 export default Front;
+export { CardFront as FrontCSS };

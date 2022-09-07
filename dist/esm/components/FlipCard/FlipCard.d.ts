@@ -10,9 +10,11 @@ declare type FlipCardProps = {
     height?: String;
 };
 declare const FlipCard: {
-    (props: FlipCardProps): JSX.Element;
+    ({ children, ...props }: FlipCardProps): JSX.Element;
+    defaultProps: {
+        variant: string;
+    };
     Front: React.FC<FrontProps>;
     Back: React.FC<BackProps>;
 };
-declare const test1 = 1;
-export { FlipCard, test1 };
+export { FlipCard };

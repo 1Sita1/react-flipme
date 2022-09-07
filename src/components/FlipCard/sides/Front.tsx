@@ -1,21 +1,15 @@
 import React from "react"
+import styled from "styled-components"
 
-import { createUseStyles } from "react-jss"
-
-const useStyles = createUseStyles({
-    flipCardFront: {
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        webkitBackfaceVisibility: "hidden",
-        backfaceVisibility: "hidden",
-        backgroundColor: "#bbb",
-        color: "black",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
+const CardFront = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: #bbb;
+    color: black;
+`
 
 export type FrontProps = {
     children?: any
@@ -23,14 +17,12 @@ export type FrontProps = {
     variant?: "light" | "dark"
 }
 
-const Front: React.FC<FrontProps> = ({ children, style }: FrontProps) => {
-    const classes = useStyles()
-
-    return (
-        <div className={classes.flipCardFront} style={style}>
-            {children}
-        </div>
-    )
+const Front: React.FC<FrontProps> = ({
+    children,
+    style
+}: FrontProps) => {
+    return <CardFront style={style}>{children}</CardFront>
 }
 
 export default Front
+export { CardFront as FrontCSS }

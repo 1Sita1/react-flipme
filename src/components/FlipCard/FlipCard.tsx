@@ -1,37 +1,33 @@
 import React from "react"
+import styled from "styled-components"
 import Front, { FrontProps } from "./sides/Front"
 import Back, { BackProps } from "./sides/Back"
-import { jss, createUseStyles } from "react-jss"
-import isolate from "jss-plugin-isolate"
 
-jss.use(
-    isolate({
-        isolate: true
-    })
-)
-
-const useStyles = createUseStyles({
-    flipCard: {
-        backgroundColor: "transparent",
-        width: "300px",
-        height: "300px",
-        perspective: "1000px",
-        "&:hover > div": {
-            transform: "rotateY(180deg)"
-        }
-    },
-    flipCardInner: {
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        transition: "transform 0.8s",
-        transformStyle: "preserve-3d",
-        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-        "&:hover": {
-            transform: "rotateY(180deg)"
-        }
+const Card = styled.div`
+    background-color: transparent;
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
+    &:hover > * {
+        transform: rotateY(180deg);
     }
-})
+`
+
+const CardInner = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    &:hover {
+        transform: rotateY(180deg);
+    }
+    & > * {
+        backgroundcolor: red;
+    }
+`
 
 type ChildrenType =
     | [React.ReactElement<FrontProps>, React.ReactElement<BackProps>]
@@ -44,18 +40,22 @@ type FlipCardProps = {
     height?: String
 }
 
-const FlipCard = (props: FlipCardProps) => {
-    const classes = useStyles()
+const defaultProps = {
+    variant: "light"
+}
 
+const FlipCard = ({ children, ...props }: FlipCardProps) => {
     return (
-        <div className={classes.flipCard} style={props.style}>
-            <div className={classes.flipCardInner}>
-                {props.children[0]}
-                {props.children[1]}
-            </div>
-        </div>
+        <Card style={props.style}>
+            <CardInner>
+                {children[0]}
+                {children[1]}
+            </CardInner>
+        </Card>
     )
 }
+
+FlipCard.defaultProps = defaultProps
 
 FlipCard.Front = Front
 FlipCard.Back = Back
