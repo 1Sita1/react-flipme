@@ -42,13 +42,10 @@ type FlipCardProps = {
     variant?: "light" | "dark"
     width?: String
     height?: String
-    theme: {
-        width: String
-    }
 }
 
 const FlipCard = (props: FlipCardProps) => {
-    const classes = useStyles(props)
+    const classes = useStyles()
 
     return (
         <div className={classes.flipCard} style={props.style}>

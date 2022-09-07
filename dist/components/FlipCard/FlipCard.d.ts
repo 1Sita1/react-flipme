@@ -8,9 +8,6 @@ declare type FlipCardProps = {
     variant?: "light" | "dark";
     width?: String;
     height?: String;
-    theme: {
-        width: String;
-    };
 };
 declare const FlipCard: {
     (props: FlipCardProps): JSX.Element;
