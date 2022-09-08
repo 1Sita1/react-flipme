@@ -1,19 +1,33 @@
 import React from "react"
 import styled from "styled-components"
+import { variants, AvailableVariants } from "./variants"
 import Front, { FrontProps } from "./sides/Front"
 import Back, { BackProps } from "./sides/Back"
 
+type FlipCardStyles = {
+    style?: React.CSSProperties
+    variant?: AvailableVariants
+    width?: string
+    height?: string
+}
+
+type ChildrenType =
+    | [React.ReactElement<FrontProps>, React.ReactElement<BackProps>]
+    | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>]
+
+type FlipCardProps = FlipCardStyles & { children: ChildrenType }
+
 const Card = styled.div`
     background-color: transparent;
-    width: 300px;
-    height: 300px;
+    width: 160px;
+    height: 220px;
     perspective: 1000px;
     &:hover > * {
         transform: rotateY(180deg);
     }
 `
 
-const CardInner = styled.div`
+const CardInner = styled.div<FlipCardStyles>`
     position: relative;
     width: 100%;
     height: 100%;
@@ -25,37 +39,29 @@ const CardInner = styled.div`
         transform: rotateY(180deg);
     }
     & > * {
-        backgroundcolor: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ${({ variant }) => {
+            if (!variant) return
+            return `
+                background-color: ${variants[variant].backColor};
+                color: ${variants[variant].foreColor};
+            `
+        }}
     }
 `
 
-type ChildrenType =
-    | [React.ReactElement<FrontProps>, React.ReactElement<BackProps>]
-    | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>]
-type FlipCardProps = {
-    children: ChildrenType
-    style?: React.CSSProperties
-    variant?: "light" | "dark"
-    width?: String
-    height?: String
-}
-
-const defaultProps = {
-    variant: "light"
-}
-
 const FlipCard = ({ children, ...props }: FlipCardProps) => {
     return (
-        <Card style={props.style}>
-            <CardInner>
+        <Card>
+            <CardInner {...props}>
                 {children[0]}
                 {children[1]}
             </CardInner>
         </Card>
     )
 }
-
-FlipCard.defaultProps = defaultProps
 
 FlipCard.Front = Front
 FlipCard.Back = Back

@@ -1,27 +1,38 @@
 import React from "react"
 import styled from "styled-components"
+import { variants, AvailableVariants } from "../variants"
 
-const CardFront = styled.div`
+type FrontStyles = {
+    style?: React.CSSProperties
+    variant?: AvailableVariants
+}
+
+const CardFront = styled.div<FrontStyles>`
     position: absolute;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background-color: #bbb;
-    color: black;
+    &&& {
+        ${({ variant }) => {
+            if (!variant) return
+            return `
+                background-color: ${variants[variant].backColor};
+                color: ${variants[variant].foreColor};
+            `
+        }}
+    }
 `
 
 export type FrontProps = {
     children?: any
-    style?: React.CSSProperties
-    variant?: "light" | "dark"
-}
+} & FrontStyles
 
 const Front: React.FC<FrontProps> = ({
     children,
-    style
+    ...props
 }: FrontProps) => {
-    return <CardFront style={style}>{children}</CardFront>
+    return <CardFront {...props}>{children}</CardFront>
 }
 
 export default Front

@@ -15,5 +15,9 @@
         "strict": true,
         "target": "es6"
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx"]
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/components/FlipCard/__tests__/FlipCard.test.js"
+    ]
 }

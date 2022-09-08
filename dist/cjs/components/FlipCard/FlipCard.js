@@ -17,12 +17,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FlipCard = void 0;
 const react_1 = __importDefault(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
+const variants_1 = require("./variants");
 const Front_1 = __importDefault(require("./sides/Front"));
 const Back_1 = __importDefault(require("./sides/Back"));
 const Card = styled_components_1.default.div `
     background-color: transparent;
-    width: 300px;
-    height: 300px;
+    width: 160px;
+    height: 220px;
     perspective: 1000px;
     &:hover > * {
         transform: rotateY(180deg);
@@ -40,21 +41,27 @@ const CardInner = styled_components_1.default.div `
         transform: rotateY(180deg);
     }
     & > * {
-        backgroundcolor: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ${({ variant }) => {
+    if (!variant)
+        return;
+    return `
+                background-color: ${variants_1.variants[variant].backColor};
+                color: ${variants_1.variants[variant].foreColor};
+            `;
+}}
     }
 `;
-const defaultProps = {
-    variant: "light"
-};
 const FlipCard = (_a) => {
     var { children } = _a, props = __rest(_a, ["children"]);
-    return (react_1.default.createElement(Card, { style: props.style },
-        react_1.default.createElement(CardInner, null,
+    return (react_1.default.createElement(Card, null,
+        react_1.default.createElement(CardInner, Object.assign({}, props),
             children[0],
             children[1])));
 };
 exports.FlipCard = FlipCard;
-FlipCard.defaultProps = defaultProps;
 FlipCard.Front = Front_1.default;
 FlipCard.Back = Back_1.default;
 //# sourceMappingURL=FlipCard.js.map

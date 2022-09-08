@@ -1,10 +1,13 @@
 import React from "react";
-declare const CardFront: import("styled-components").StyledComponent<"div", any, {}, never>;
+import { AvailableVariants } from "../variants";
+declare type FrontStyles = {
+    style?: React.CSSProperties;
+    variant?: AvailableVariants;
+};
+declare const CardFront: import("styled-components").StyledComponent<"div", any, FrontStyles, never>;
 export declare type FrontProps = {
     children?: any;
-    style?: React.CSSProperties;
-    variant?: "light" | "dark";
-};
+} & FrontStyles;
 declare const Front: React.FC<FrontProps>;
 export default Front;
 export { CardFront as FrontCSS };

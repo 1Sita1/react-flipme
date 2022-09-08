@@ -1,28 +1,39 @@
 import React from "react"
 import styled from "styled-components"
+import { variants, AvailableVariants } from "../variants"
 
-const CardBack = styled.div`
+type BackStyles = {
+    style?: React.CSSProperties
+    variant?: AvailableVariants
+}
+
+const CardBack = styled.div<BackStyles>`
     position: absolute;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background-color: #2980b9;
-    color: white;
     transform: rotateY(180deg);
+    &&& {
+        ${({ variant }) => {
+            if (!variant) return
+            return `
+                background-color: ${variants[variant].backColor};
+                color: ${variants[variant].foreColor};
+            `
+        }}
+    }
 `
 
 export type BackProps = {
     children?: any
-    style?: React.CSSProperties
-    variant?: "light" | "dark"
-}
+} & BackStyles
 
 const Back: React.FC<BackProps> = ({
     children,
-    style
+    ...props
 }: BackProps) => {
-    return <CardBack style={style}>{children}</CardBack>
+    return <CardBack {...props}>{children}</CardBack>
 }
 
 export default Back

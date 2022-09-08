@@ -11,12 +11,13 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import styled from "styled-components";
+import { variants } from "./variants";
 import Front from "./sides/Front";
 import Back from "./sides/Back";
 const Card = styled.div `
     background-color: transparent;
-    width: 300px;
-    height: 300px;
+    width: 160px;
+    height: 220px;
     perspective: 1000px;
     &:hover > * {
         transform: rotateY(180deg);
@@ -34,20 +35,26 @@ const CardInner = styled.div `
         transform: rotateY(180deg);
     }
     & > * {
-        backgroundcolor: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ${({ variant }) => {
+    if (!variant)
+        return;
+    return `
+                background-color: ${variants[variant].backColor};
+                color: ${variants[variant].foreColor};
+            `;
+}}
     }
 `;
-const defaultProps = {
-    variant: "light"
-};
 const FlipCard = (_a) => {
     var { children } = _a, props = __rest(_a, ["children"]);
-    return (React.createElement(Card, { style: props.style },
-        React.createElement(CardInner, null,
+    return (React.createElement(Card, null,
+        React.createElement(CardInner, Object.assign({}, props),
             children[0],
             children[1])));
 };
-FlipCard.defaultProps = defaultProps;
 FlipCard.Front = Front;
 FlipCard.Back = Back;
 export { FlipCard };
