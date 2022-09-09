@@ -11,7 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import styled from "styled-components";
-import { variants } from "../variants";
+import { variants } from "../preferences/variants";
 const CardFront = styled.div `
     position: absolute;
     width: 100%;

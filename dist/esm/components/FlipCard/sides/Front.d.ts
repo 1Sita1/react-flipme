@@ -1,5 +1,5 @@
 import React from "react";
-import { AvailableVariants } from "../variants";
+import { AvailableVariants } from "../preferences/variants";
 declare type FrontStyles = {
     style?: React.CSSProperties;
     variant?: AvailableVariants;

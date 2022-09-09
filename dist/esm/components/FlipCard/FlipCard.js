@@ -11,14 +11,24 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import styled from "styled-components";
-import { variants } from "./variants";
+import { variants } from "./preferences/variants";
+import { sizes } from "./preferences/sizes";
 import Front from "./sides/Front";
 import Back from "./sides/Back";
 const Card = styled.div `
     background-color: transparent;
-    width: 160px;
-    height: 220px;
     perspective: 1000px;
+    width: ${({ size }) => {
+    return sizes[size !== null && size !== void 0 ? size : "default"].width;
+}};
+    height: ${({ size }) => sizes[size !== null && size !== void 0 ? size : "default"].height};
+    ${({ height, width }) => {
+    return `
+            ${width && "width: " + width + ";"}
+            ${height && "height: " + height + ";"}
+
+        `;
+}}
     &:hover > * {
         transform: rotateY(180deg);
     }
@@ -50,7 +60,7 @@ const CardInner = styled.div `
 `;
 const FlipCard = (_a) => {
     var { children } = _a, props = __rest(_a, ["children"]);
-    return (React.createElement(Card, null,
+    return (React.createElement(Card, Object.assign({}, props),
         React.createElement(CardInner, Object.assign({}, props),
             children[0],
             children[1])));

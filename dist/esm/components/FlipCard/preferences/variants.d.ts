@@ -9,4 +9,4 @@ declare type Variants = {
 declare const variants: Variants;
 declare const keys: string[];
 declare type AvailableVariants = typeof keys[number];
-export { variants, Variant, AvailableVariants };
+export { variants, AvailableVariants, Variants, Variant };

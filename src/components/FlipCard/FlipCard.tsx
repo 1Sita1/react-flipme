@@ -1,12 +1,15 @@
 import React from "react"
 import styled from "styled-components"
-import { variants, AvailableVariants } from "./variants"
+import { variants, AvailableVariants } from "./preferences/variants"
+import { AvailableSizes, sizes } from "./preferences/sizes"
 import Front, { FrontProps } from "./sides/Front"
 import Back, { BackProps } from "./sides/Back"
 
 type FlipCardStyles = {
     style?: React.CSSProperties
     variant?: AvailableVariants
+    size?: AvailableSizes
+    rounded?: boolean
     width?: string
     height?: string
 }
@@ -17,11 +20,18 @@ type ChildrenType =
 
 type FlipCardProps = FlipCardStyles & { children: ChildrenType }
 
-const Card = styled.div`
+const Card = styled.div<FlipCardStyles>`
     background-color: transparent;
-    width: 160px;
-    height: 220px;
     perspective: 1000px;
+    width: ${({ size }) => sizes[size ?? "default"].width};
+    height: ${({ size }) => sizes[size ?? "default"].height};
+    ${({ height, width }) => {
+        return `
+            ${width && "width: " + width + ";"}
+            ${height && "height: " + height + ";"}
+
+        `
+    }}
     &:hover > * {
         transform: rotateY(180deg);
     }
@@ -54,7 +64,7 @@ const CardInner = styled.div<FlipCardStyles>`
 
 const FlipCard = ({ children, ...props }: FlipCardProps) => {
     return (
-        <Card>
+        <Card {...props}>
             <CardInner {...props}>
                 {children[0]}
                 {children[1]}

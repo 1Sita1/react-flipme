@@ -1,4 +1,9 @@
 const variants = {
+    default: {
+        name: "default",
+        foreColor: "#000",
+        backColor: "#fff"
+    },
     light: {
         name: "light",
         foreColor: "#000",
@@ -8,11 +13,6 @@ const variants = {
         name: "dark",
         foreColor: "#fff",
         backColor: "#292929"
-    },
-    default: {
-        name: "default",
-        foreColor: "#000",
-        backColor: "#fff"
     }
 };
 const keys = Object.keys(variants);

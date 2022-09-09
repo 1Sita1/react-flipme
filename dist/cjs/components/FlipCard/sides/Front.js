@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontCSS = void 0;
 const react_1 = __importDefault(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
-const variants_1 = require("../variants");
+const variants_1 = require("../preferences/variants");
 const CardFront = styled_components_1.default.div `
     position: absolute;
     width: 100%;

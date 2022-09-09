@@ -1,10 +1,12 @@
 import React from "react";
-import { AvailableVariants } from "./variants";
+import { AvailableVariants } from "./preferences/variants";
+import { AvailableSizes } from "./preferences/sizes";
 import { FrontProps } from "./sides/Front";
 import { BackProps } from "./sides/Back";
 declare type FlipCardStyles = {
     style?: React.CSSProperties;
     variant?: AvailableVariants;
+    size?: AvailableSizes;
     width?: string;
     height?: string;
 };

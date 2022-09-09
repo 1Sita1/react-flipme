@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { variants, AvailableVariants } from "../variants"
+import { variants, AvailableVariants } from "../preferences/variants"
 
 type FrontStyles = {
     style?: React.CSSProperties
