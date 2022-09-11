@@ -3,10 +3,17 @@ declare type Variant = {
     foreColor: string;
     backColor: string;
 };
-declare type Variants = {
-    [name: string]: Variant;
+declare const variants: {
+    readonly light: {
+        readonly name: "light";
+        readonly foreColor: "#000";
+        readonly backColor: "#fff";
+    };
+    readonly dark: {
+        readonly name: "dark";
+        readonly foreColor: "#fff";
+        readonly backColor: "#292929";
+    };
 };
-declare const variants: Variants;
-declare const keys: string[];
-declare type AvailableVariants = typeof keys[number];
-export { variants, AvailableVariants, Variants, Variant };
+declare type AvailableVariants = keyof typeof variants;
+export { variants, AvailableVariants, Variant };

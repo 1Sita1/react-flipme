@@ -2,11 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.variants = void 0;
 const variants = {
-    default: {
-        name: "default",
-        foreColor: "#000",
-        backColor: "#fff"
-    },
     light: {
         name: "light",
         foreColor: "#000",
@@ -19,5 +14,4 @@ const variants = {
     }
 };
 exports.variants = variants;
-const keys = Object.keys(variants);
 //# sourceMappingURL=variants.js.map

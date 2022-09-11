@@ -2,10 +2,23 @@ declare type Size = {
     width: string;
     height: string;
 };
-declare type Sizes = {
-    [name: string]: Size;
+declare const sizes: {
+    readonly xl: {
+        readonly width: "200px";
+        readonly height: "300px";
+    };
+    readonly l: {
+        readonly width: "180px";
+        readonly height: "250px";
+    };
+    readonly m: {
+        readonly width: "160px";
+        readonly height: "220px";
+    };
+    readonly s: {
+        readonly width: "120px";
+        readonly height: "180px";
+    };
 };
-declare const sizes: Sizes;
-declare const keys: string[];
-declare type AvailableSizes = typeof keys[number];
-export { sizes, AvailableSizes, Sizes, Size };
+declare type AvailableSizes = keyof typeof sizes;
+export { sizes, AvailableSizes, Size };

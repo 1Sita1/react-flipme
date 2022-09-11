@@ -12,6 +12,8 @@ type FlipCardStyles = {
     rounded?: boolean
     width?: string
     height?: string
+    flipped?: boolean
+    flipOnHover?: boolean
 }
 
 type ChildrenType =
@@ -23,8 +25,8 @@ type FlipCardProps = FlipCardStyles & { children: ChildrenType }
 const Card = styled.div<FlipCardStyles>`
     background-color: transparent;
     perspective: 1000px;
-    width: ${({ size }) => sizes[size ?? "default"].width};
-    height: ${({ size }) => sizes[size ?? "default"].height};
+    width: ${({ size }) => sizes[size ?? "m"].width};
+    height: ${({ size }) => sizes[size ?? "m"].height};
     ${({ height, width }) => {
         return `
             ${width && "width: " + width + ";"}
@@ -32,6 +34,12 @@ const Card = styled.div<FlipCardStyles>`
 
         `
     }}
+    ${({ rounded }) => {
+        if (!rounded) return
+        return `
+            border-radius: 10px;
+        `
+    }} 
     &:hover > * {
         transform: rotateY(180deg);
     }
@@ -45,8 +53,15 @@ const CardInner = styled.div<FlipCardStyles>`
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    ${({ flipped }) =>
+        flipped ? "transform: rotateY(180deg);" : null}
     &:hover {
-        transform: rotateY(180deg);
+        ${({ flipped, flipOnHover }) => {
+            if (flipOnHover && flipped)
+                return "transform: rotateY(360deg);"
+            if (flipOnHover && !flipped)
+                return "transform: rotateY(180deg);"
+        }}
     }
     & > * {
         display: flex;
@@ -57,6 +72,12 @@ const CardInner = styled.div<FlipCardStyles>`
             return `
                 background-color: ${variants[variant].backColor};
                 color: ${variants[variant].foreColor};
+            `
+        }}
+        ${({ rounded }) => {
+            if (!rounded) return
+            return `
+                border-radius: 10px;
             `
         }}
     }
@@ -75,5 +96,9 @@ const FlipCard = ({ children, ...props }: FlipCardProps) => {
 
 FlipCard.Front = Front
 FlipCard.Back = Back
+FlipCard.defaultProps = {
+    size: "m",
+    flipOnHover: true
+}
 
-export { FlipCard }
+export { FlipCard, FlipCardProps, FlipCardStyles, ChildrenType }

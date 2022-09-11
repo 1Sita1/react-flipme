@@ -3,16 +3,7 @@ type Size = {
     height: string
 }
 
-type Sizes = {
-    [name: string]: Size
-}
-
-const sizes: Sizes = {
-    default: {
-        width: "160px",
-        height: "220px"
-    },
-
+const sizes = {
     xl: {
         width: "200px",
         height: "300px"
@@ -32,9 +23,8 @@ const sizes: Sizes = {
         width: "120px",
         height: "180px"
     }
-}
+} as const
 
-const keys = Object.keys(sizes)
-type AvailableSizes = typeof keys[number]
+type AvailableSizes = keyof typeof sizes
 
-export { sizes, AvailableSizes, Sizes, Size }
+export { sizes, AvailableSizes, Size }

@@ -24,10 +24,8 @@ const Back_1 = __importDefault(require("./sides/Back"));
 const Card = styled_components_1.default.div `
     background-color: transparent;
     perspective: 1000px;
-    width: ${({ size }) => {
-    return sizes_1.sizes[size !== null && size !== void 0 ? size : "default"].width;
-}};
-    height: ${({ size }) => sizes_1.sizes[size !== null && size !== void 0 ? size : "default"].height};
+    width: ${({ size }) => sizes_1.sizes[size !== null && size !== void 0 ? size : "m"].width};
+    height: ${({ size }) => sizes_1.sizes[size !== null && size !== void 0 ? size : "m"].height};
     ${({ height, width }) => {
     return `
             ${width && "width: " + width + ";"}
@@ -35,6 +33,13 @@ const Card = styled_components_1.default.div `
 
         `;
 }}
+    ${({ rounded }) => {
+    if (!rounded)
+        return;
+    return `
+            border-radius: 10px;
+        `;
+}} 
     &:hover > * {
         transform: rotateY(180deg);
     }
@@ -47,8 +52,14 @@ const CardInner = styled_components_1.default.div `
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    ${({ flipped }) => flipped ? "transform: rotateY(180deg);" : null}
     &:hover {
-        transform: rotateY(180deg);
+        ${({ flipped, flipOnHover }) => {
+    if (flipOnHover && flipped)
+        return "transform: rotateY(360deg);";
+    if (flipOnHover && !flipped)
+        return "transform: rotateY(180deg);";
+}}
     }
     & > * {
         display: flex;
@@ -60,6 +71,13 @@ const CardInner = styled_components_1.default.div `
     return `
                 background-color: ${variants_1.variants[variant].backColor};
                 color: ${variants_1.variants[variant].foreColor};
+            `;
+}}
+        ${({ rounded }) => {
+    if (!rounded)
+        return;
+    return `
+                border-radius: 10px;
             `;
 }}
     }
@@ -74,4 +92,7 @@ const FlipCard = (_a) => {
 exports.FlipCard = FlipCard;
 FlipCard.Front = Front_1.default;
 FlipCard.Back = Back_1.default;
+FlipCard.defaultProps = {
+    flipOnHover: true
+};
 //# sourceMappingURL=FlipCard.js.map

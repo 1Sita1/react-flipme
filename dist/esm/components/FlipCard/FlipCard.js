@@ -18,10 +18,8 @@ import Back from "./sides/Back";
 const Card = styled.div `
     background-color: transparent;
     perspective: 1000px;
-    width: ${({ size }) => {
-    return sizes[size !== null && size !== void 0 ? size : "default"].width;
-}};
-    height: ${({ size }) => sizes[size !== null && size !== void 0 ? size : "default"].height};
+    width: ${({ size }) => sizes[size !== null && size !== void 0 ? size : "m"].width};
+    height: ${({ size }) => sizes[size !== null && size !== void 0 ? size : "m"].height};
     ${({ height, width }) => {
     return `
             ${width && "width: " + width + ";"}
@@ -29,6 +27,13 @@ const Card = styled.div `
 
         `;
 }}
+    ${({ rounded }) => {
+    if (!rounded)
+        return;
+    return `
+            border-radius: 10px;
+        `;
+}} 
     &:hover > * {
         transform: rotateY(180deg);
     }
@@ -41,8 +46,14 @@ const CardInner = styled.div `
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    ${({ flipped }) => flipped ? "transform: rotateY(180deg);" : null}
     &:hover {
-        transform: rotateY(180deg);
+        ${({ flipped, flipOnHover }) => {
+    if (flipOnHover && flipped)
+        return "transform: rotateY(360deg);";
+    if (flipOnHover && !flipped)
+        return "transform: rotateY(180deg);";
+}}
     }
     & > * {
         display: flex;
@@ -56,6 +67,13 @@ const CardInner = styled.div `
                 color: ${variants[variant].foreColor};
             `;
 }}
+        ${({ rounded }) => {
+    if (!rounded)
+        return;
+    return `
+                border-radius: 10px;
+            `;
+}}
     }
 `;
 const FlipCard = (_a) => {
@@ -67,5 +85,8 @@ const FlipCard = (_a) => {
 };
 FlipCard.Front = Front;
 FlipCard.Back = Back;
+FlipCard.defaultProps = {
+    flipOnHover: true
+};
 export { FlipCard };
 //# sourceMappingURL=FlipCard.js.map

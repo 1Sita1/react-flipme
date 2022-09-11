@@ -4,17 +4,7 @@ type Variant = {
     backColor: string
 }
 
-type Variants = {
-    [name: string]: Variant
-}
-
-const variants: Variants = {
-    default: {
-        name: "default",
-        foreColor: "#000",
-        backColor: "#fff"
-    },
-
+const variants = {
     light: {
         name: "light",
         foreColor: "#000",
@@ -26,9 +16,8 @@ const variants: Variants = {
         foreColor: "#fff",
         backColor: "#292929"
     }
-}
+} as const
 
-const keys = Object.keys(variants)
-type AvailableVariants = typeof keys[number]
+type AvailableVariants = keyof typeof variants
 
-export { variants, AvailableVariants, Variants, Variant }
+export { variants, AvailableVariants, Variant }

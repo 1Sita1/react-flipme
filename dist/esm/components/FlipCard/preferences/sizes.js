@@ -1,8 +1,4 @@
 const sizes = {
-    default: {
-        width: "160px",
-        height: "220px"
-    },
     xl: {
         width: "200px",
         height: "300px"
@@ -20,6 +16,5 @@ const sizes = {
         height: "180px"
     }
 };
-const keys = Object.keys(sizes);
 export { sizes };
 //# sourceMappingURL=sizes.js.map
