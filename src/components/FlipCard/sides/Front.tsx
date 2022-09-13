@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import SideBase from "./SideBase"
 import { variants, AvailableVariants } from "../preferences/variants"
 
 type FrontStyles = {
@@ -7,12 +8,7 @@ type FrontStyles = {
     variant?: AvailableVariants
 }
 
-const CardFront = styled.div<FrontStyles>`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+const CardFront = styled(SideBase)<FrontStyles>`
     &&& {
         ${({ variant }) => {
             if (!variant) return

@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import SideBase from "./SideBase"
 import { variants, AvailableVariants } from "../preferences/variants"
 
 type BackStyles = {
@@ -7,12 +8,7 @@ type BackStyles = {
     variant?: AvailableVariants
 }
 
-const CardBack = styled.div<BackStyles>`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+const CardBack = styled(SideBase)<BackStyles>`
     transform: rotateY(180deg);
     &&& {
         ${({ variant }) => {

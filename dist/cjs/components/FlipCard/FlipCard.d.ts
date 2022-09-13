@@ -8,21 +8,17 @@ declare type FlipCardStyles = {
     variant?: AvailableVariants;
     size?: AvailableSizes;
     rounded?: boolean;
-    width?: string;
-    height?: string;
     flipped?: boolean;
     flipOnHover?: boolean;
+    width?: string;
+    height?: string;
 };
 declare type ChildrenType = [React.ReactElement<FrontProps>, React.ReactElement<BackProps>] | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>];
 declare type FlipCardProps = FlipCardStyles & {
     children: ChildrenType;
 };
-declare const FlipCard: {
-    ({ children, ...props }: FlipCardProps): JSX.Element;
+declare const FlipCard: React.FC<FlipCardProps> & {
     Front: React.FC<FrontProps>;
     Back: React.FC<BackProps>;
-    defaultProps: {
-        flipOnHover: boolean;
-    };
 };
 export { FlipCard, FlipCardProps, FlipCardStyles, ChildrenType };

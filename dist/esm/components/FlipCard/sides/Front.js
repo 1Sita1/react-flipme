@@ -11,13 +11,9 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import styled from "styled-components";
+import SideBase from "./SideBase";
 import { variants } from "../preferences/variants";
-const CardFront = styled.div `
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+const CardFront = styled(SideBase) `
     &&& {
         ${({ variant }) => {
     if (!variant)

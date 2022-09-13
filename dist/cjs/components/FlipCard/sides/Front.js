@@ -17,13 +17,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontCSS = void 0;
 const react_1 = __importDefault(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
+const SideBase_1 = __importDefault(require("./SideBase"));
 const variants_1 = require("../preferences/variants");
-const CardFront = styled_components_1.default.div `
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+const CardFront = (0, styled_components_1.default)(SideBase_1.default) `
     &&& {
         ${({ variant }) => {
     if (!variant)
