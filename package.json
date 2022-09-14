@@ -1,6 +1,6 @@
 {
     "name": "react-flipme",
-    "version": "0.3.45",
+    "version": "0.3.53",
     "description": "React UI library for flipping cards",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",

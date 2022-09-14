@@ -9,7 +9,6 @@ declare type FlipCardStyles = {
     size?: AvailableSizes;
     rounded?: boolean;
     flipped?: boolean;
-    flipOnHover?: boolean;
     width?: string;
     height?: string;
 };

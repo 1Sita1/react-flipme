@@ -9,7 +9,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { variants } from "./preferences/variants";
 import { sizes } from "./preferences/sizes";
@@ -18,9 +18,7 @@ import Back, { BackCSS } from "./sides/Back";
 const defaultProps = {
     variant: "light",
     size: "m",
-    rounded: false,
-    flipped: false,
-    flipOnHover: true
+    rounded: false
 };
 const Card = styled.div `
     perspective: 1000px;
@@ -41,7 +39,13 @@ const Card = styled.div `
             `;
 }} 
 
+    ${FrontCSS} {
+    }
+    ${BackCSS} {
+    }
+
     ${({ flipped }) => {
+    console.log("in css ", flipped);
     if (flipped) {
         return `
                 ${FrontCSS} {
@@ -55,7 +59,6 @@ const Card = styled.div `
 }}
 
     ${({ variant }) => {
-    console.log(variant);
     if (variant) {
         return `
                 ${BackCSS} {
@@ -84,11 +87,21 @@ const Card = styled.div `
 `;
 const FlipCard = (_a) => {
     var { children } = _a, props = __rest(_a, ["children"]);
+    console.log(props.flipped);
     const [flipped, setFlipped] = useState(Boolean(props.flipped));
-    const switchState = () => {
+    const ref = useRef({
+        manualMode: props.flipped !== undefined
+    });
+    useEffect(() => {
+        ref.current.manualMode = props.flipped !== undefined;
+    });
+    console.log(flipped);
+    const flip = () => {
+        if (!ref.current.manualMode)
+            return;
         setFlipped((prev) => !prev);
     };
-    return (React.createElement(Card, Object.assign({}, props, { flipped: flipped, onMouseEnter: switchState, onMouseLeave: switchState }),
+    return (React.createElement(Card, Object.assign({}, props, { flipped: flipped, onMouseEnter: flip, onMouseLeave: flip }),
         children[0],
         children[1]));
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import styled from "styled-components"
 import { variants, AvailableVariants } from "./preferences/variants"
 import { AvailableSizes, sizes } from "./preferences/sizes"
@@ -11,7 +11,6 @@ type FlipCardStyles = {
     size?: AvailableSizes
     rounded?: boolean
     flipped?: boolean
-    flipOnHover?: boolean
     width?: string
     height?: string
 }
@@ -19,9 +18,7 @@ type FlipCardStyles = {
 const defaultProps: FlipCardStyles = {
     variant: "light",
     size: "m",
-    rounded: false,
-    flipped: false,
-    flipOnHover: true
+    rounded: false
 }
 
 type ChildrenType =
@@ -49,7 +46,13 @@ const Card = styled.div<FlipCardProps>`
             `
     }} 
 
+    ${FrontCSS} {
+    }
+    ${BackCSS} {
+    }
+
     ${({ flipped }) => {
+        console.log("in css ", flipped)
         if (flipped) {
             return `
                 ${FrontCSS} {
@@ -63,7 +66,6 @@ const Card = styled.div<FlipCardProps>`
     }}
 
     ${({ variant }) => {
-        console.log(variant)
         if (variant) {
             return `
                 ${BackCSS} {
@@ -94,9 +96,18 @@ const FlipCard: React.FC<FlipCardProps> & {
     Front: React.FC<FrontProps>
     Back: React.FC<BackProps>
 } = ({ children, ...props }: FlipCardProps) => {
+    console.log(props.flipped)
     const [flipped, setFlipped] = useState(Boolean(props.flipped))
+    const ref = useRef({
+        manualMode: props.flipped !== undefined
+    })
 
-    const switchState = () => {
+    useEffect(() => {
+        ref.current.manualMode = props.flipped !== undefined
+    })
+    console.log(flipped)
+    const flip = () => {
+        if (!ref.current.manualMode) return
         setFlipped((prev) => !prev)
     }
 
@@ -104,8 +115,8 @@ const FlipCard: React.FC<FlipCardProps> & {
         <Card
             {...props}
             flipped={flipped}
-            onMouseEnter={switchState}
-            onMouseLeave={switchState}
+            onMouseEnter={flip}
+            onMouseLeave={flip}
         >
             {children[0]}
             {children[1]}
