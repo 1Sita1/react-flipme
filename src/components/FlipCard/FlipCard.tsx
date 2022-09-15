@@ -52,7 +52,6 @@ const Card = styled.div<FlipCardProps>`
     }
 
     ${({ flipped }) => {
-        console.log("in css ", flipped)
         if (flipped) {
             return `
                 ${FrontCSS} {
@@ -96,18 +95,20 @@ const FlipCard: React.FC<FlipCardProps> & {
     Front: React.FC<FrontProps>
     Back: React.FC<BackProps>
 } = ({ children, ...props }: FlipCardProps) => {
-    console.log(props.flipped)
-    const [flipped, setFlipped] = useState(Boolean(props.flipped))
+    const [flipped, setFlipped] = useState<boolean>(
+        Boolean(props.flipped)
+    )
     const ref = useRef({
         manualMode: props.flipped !== undefined
     })
 
     useEffect(() => {
         ref.current.manualMode = props.flipped !== undefined
-    })
-    console.log(flipped)
+        setFlipped(Boolean(props.flipped))
+    }, [props.flipped])
+
     const flip = () => {
-        if (!ref.current.manualMode) return
+        if (ref.current.manualMode) return
         setFlipped((prev) => !prev)
     }
 

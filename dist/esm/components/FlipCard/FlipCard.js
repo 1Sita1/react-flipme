@@ -45,7 +45,6 @@ const Card = styled.div `
     }
 
     ${({ flipped }) => {
-    console.log("in css ", flipped);
     if (flipped) {
         return `
                 ${FrontCSS} {
@@ -87,17 +86,16 @@ const Card = styled.div `
 `;
 const FlipCard = (_a) => {
     var { children } = _a, props = __rest(_a, ["children"]);
-    console.log(props.flipped);
     const [flipped, setFlipped] = useState(Boolean(props.flipped));
     const ref = useRef({
         manualMode: props.flipped !== undefined
     });
     useEffect(() => {
         ref.current.manualMode = props.flipped !== undefined;
-    });
-    console.log(flipped);
+        setFlipped(Boolean(props.flipped));
+    }, [props.flipped]);
     const flip = () => {
-        if (!ref.current.manualMode)
+        if (ref.current.manualMode)
             return;
         setFlipped((prev) => !prev);
     };
