@@ -23,7 +23,8 @@ const CardBack = styled(SideBase)<BackStyles>`
 
 export type BackProps = {
     children?: any
-} & BackStyles
+} & BackStyles &
+    React.HTMLAttributes<HTMLDivElement>
 
 const Back: React.FC<BackProps> = ({
     children,

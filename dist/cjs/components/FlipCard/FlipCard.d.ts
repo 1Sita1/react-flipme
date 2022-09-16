@@ -15,7 +15,7 @@ declare type FlipCardStyles = {
 declare type ChildrenType = [React.ReactElement<FrontProps>, React.ReactElement<BackProps>] | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>];
 declare type FlipCardProps = FlipCardStyles & {
     children: ChildrenType;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 declare const FlipCard: React.FC<FlipCardProps> & {
     Front: React.FC<FrontProps>;
     Back: React.FC<BackProps>;

@@ -7,7 +7,7 @@ declare type FrontStyles = {
 declare const CardFront: import("styled-components").StyledComponent<"div", any, FrontStyles, never>;
 export declare type FrontProps = {
     children?: any;
-} & FrontStyles;
+} & FrontStyles & React.HTMLAttributes<HTMLDivElement>;
 declare const Front: React.FC<FrontProps>;
 export default Front;
 export { CardFront as FrontCSS };

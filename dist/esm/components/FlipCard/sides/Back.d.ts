@@ -7,7 +7,7 @@ declare type BackStyles = {
 declare const CardBack: import("styled-components").StyledComponent<"div", any, BackStyles, never>;
 export declare type BackProps = {
     children?: any;
-} & BackStyles;
+} & BackStyles & React.HTMLAttributes<HTMLDivElement>;
 declare const Back: React.FC<BackProps>;
 export default Back;
 export { CardBack as BackCSS };

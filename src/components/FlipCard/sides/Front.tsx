@@ -22,7 +22,8 @@ const CardFront = styled(SideBase)<FrontStyles>`
 
 export type FrontProps = {
     children?: any
-} & FrontStyles
+} & FrontStyles &
+    React.HTMLAttributes<HTMLDivElement>
 
 const Front: React.FC<FrontProps> = ({
     children,

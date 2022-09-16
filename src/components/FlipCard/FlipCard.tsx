@@ -25,7 +25,9 @@ type ChildrenType =
     | [React.ReactElement<FrontProps>, React.ReactElement<BackProps>]
     | [React.ReactElement<BackProps>, React.ReactElement<FrontProps>]
 
-type FlipCardProps = FlipCardStyles & { children: ChildrenType }
+type FlipCardProps = FlipCardStyles & {
+    children: ChildrenType
+} & React.HTMLAttributes<HTMLDivElement>
 
 const Card = styled.div<FlipCardProps>`
     perspective: 1000px;
